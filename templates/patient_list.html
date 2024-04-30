@@ -1,0 +1,144 @@
+{% extends "header.html" %}
+
+{% block main %}
+
+<main id="main" class="main">
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Patient List</h5>
+         
+            <!-- Table with stripped rows -->
+            <table class="table datatable">
+              <thead>
+                <tr>
+                  <th>Patient ID</th>
+                  <th>Name</th>
+                  <th>Image</th>
+                  <th>Age</th>
+                  <th>Status</th>
+                  <th>View</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for patient in patient_list %}
+              <tr>
+               
+                <td>{{patient.patient_id}}</td>
+                <td>{{patient.name}}</td>
+                <td>{{patient.image}}</td>
+                <td>{{patient.age}}</td>
+                <td>{{patient.status}}</td>
+                {% comment %} <td>
+                  <button class="btn btn-outline-primary"  onclick="viewPatientDetails('{{patient.patient_id}}')">
+                      View
+                  </button>
+              </td> {% endcomment %}
+              <td>
+                
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable">
+                  View
+                </button>
+
+                  <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Patient Details</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                            
+                            <h5 class="card-title">Patient Details</h5>
+            
+                            <div class="row">
+                              <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                              <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                            </div>
+            
+                            <div class="row">
+                              <div class="col-lg-3 col-md-4 label">Company</div>
+                              <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                            </div>
+            
+                            <div class="row">
+                              <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                              <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                            </div>
+            
+                            <div class="row">
+                              <div class="col-lg-3 col-md-4 label">Company</div>
+                              <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                            </div>
+            
+                            <div class="row">
+                              <div class="col-lg-3 col-md-4 label">Phone</div>
+                              <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                            </div>
+            
+                            <div class="row">
+                              <div class="col-lg-3 col-md-4 label">Email</div>
+                              <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                            </div>
+            
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Download</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </td>
+              
+              
+
+                
+              </tr>
+              {% endfor %}
+            </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main><!-- End #main -->
+
+
+
+
+
+{% comment %} <script>
+  function viewPatientDetails(patientId) {
+    console.log(patientId)
+      
+      $.ajax({
+          url: '{% url "patient_details" %}',
+          type: 'POST',
+          data: {
+              'patient_id': patientId,
+              csrfmiddlewaretoken:"{{ csrf_token }}"
+          },
+          success: function(response) {
+              // Redirect to the page where you want to display the details
+              window.location.href = response.redirect_url;
+          },
+          error: function(xhr, errmsg, err) {
+              // Handle error
+              console.log(errmsg);
+          }
+      });
+  }
+</script> {% endcomment %}
+
+{% endblock main %}
+
+
