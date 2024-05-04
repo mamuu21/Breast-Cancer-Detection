@@ -1,14 +1,14 @@
-from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import TemplateView, CreateView, ListView
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from .models import Patient
 from django.urls import reverse_lazy
-from django.http import JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class DashBoardView(TemplateView):
+class DashBoardView(LoginRequiredMixin, TemplateView):
     template_name = "dashboard.html"
+    login_url = "login"
     
     
     def get_context_data(self, **kwargs):
@@ -50,24 +50,6 @@ class ImageView(ListView):
     template_name = "images.html" 
        
     
-class LoginView(LoginView):
-    template_name = "login.html"
-    
-
-    
-class LogoutView(LogoutView):
-    template_name = "login.html"
-    # success_url = reverse_lazy('login')
-    
-class RegisterView(FormView):
-    template_name = 'register.html'
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')  # Redirect to login page after successful registration
-
-    def form_valid(self, form):
-        form.save()  # Save the user
-        return super().form_valid(form) 
-    
 class AddPatientView(CreateView):
     template_name = "add_patient.html"
     model = Patient
@@ -80,12 +62,4 @@ class AddPatientView(CreateView):
         return super().form_valid(form)
     
     # TODO : adding model to investigate uploaded image for cancer detection
-    
-def getUserDetails(request):
-    print('helolo')
-    if request.method=='POST':
-        request_getdata = request.POST.get('patient_id')
-        print(request_getdata)
-        
-    else:
-        print('No data')    
+      

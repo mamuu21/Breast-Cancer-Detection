@@ -74,23 +74,25 @@
         </a>
       </li><!-- End Image Nav -->
 
-      <li class="nav-item">
+      {% comment %} <li class="nav-item">
         <a class="nav-link collapsed" href="{% url "login" %}">
           <span>Login</span>
         </a>
-      </li><!-- End Login Page Nav -->
+      </li><!-- End Login Page Nav --> {% endcomment %}
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url "logout" %}">
-          <span>Logout</span>
-        </a>
+        <form method="post" action="{% url "logout" %}">
+          {% csrf_token %}
+          <button class="nav-link collapsed" type="submit">Logout</button>
+      </form>
+        
       </li><!-- End Login Page Nav -->
 
-      <li class="nav-item">
+      {% comment %} <li class="nav-item">
         <a class="nav-link collapsed" href="{% url "register" %}">
           <span>Create an account</span>
         </a>
-      </li><!-- End Login Page Nav -->
+      </li> {% endcomment %}
     </ul>
   </aside><!-- End Sidebar-->
 {% endblock header %}
