@@ -54,12 +54,13 @@ class AddPatientView(CreateView):
     template_name = "add_patient.html"
     model = Patient
     fields = ["patient_id", "name", "age", "gender", "image"]
-    success_url = reverse_lazy("dashboard")
+    success_url = reverse_lazy("analysis_page")
     
+
     def form_valid(self, form):
-        # Set status to "normal" before saving the form
         form.instance.status = True  # Assuming True represents "normal"
+        form.save()
         return super().form_valid(form)
-    
+   
     # TODO : adding model to investigate uploaded image for cancer detection
       
