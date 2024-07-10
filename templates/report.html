@@ -1,0 +1,194 @@
+{% extends "header.html" %}
+
+{% block main %}
+<main id="main" class="main">
+
+    <section class="section profile">
+      
+        <div class="col-xl-8">
+
+              <!-- Bordered Tabs -->
+              <div class="tab-content pt-2">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 2em; text-align: center;">MEDICAL REPORT</h5>
+                      <!-- Active Table -->
+                      <table class="table table-borderless">
+                        {% comment %} <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Start Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>Brandon Jacob</td>
+                            <td>Designer</td>
+                            <td>28</td>
+                            <td>2016-05-25</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>Bridie Kessler</td>
+                            <td>Developer</td>
+                            <td>35</td>
+                            <td>2014-12-05</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>Ashleigh Langosh</td>
+                            <td>Finance</td>
+                            <td>45</td>
+                            <td>2011-08-12</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">4</th>
+                            <td>Angus Grady</td>
+                            <td>HR</td>
+                            <td>34</td>
+                            <td>2012-06-11</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">5</th>
+                            <td>Raheem Lehner</td>
+                            <td>Dynamic Division Officer</td>
+                            <td>47</td>
+                            <td>2011-04-19</td>
+                          </tr>
+                        </tbody> {% endcomment %}
+                        <tr>
+                            <td>
+                                <h5 class="card-title">Visit Info</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Doctor's Name:</p>
+                            </td>
+                            <td>
+                                <p>{{doctor}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Specialization:</p>
+                            </td>
+                            <td>
+                                <p>{{specialization}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Visit Date:</p>
+                            </td>
+                            <td>
+                                <p>{{Date|date:"d.m.Y"}}</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <h5 class="card-title">Patient Info</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Full Name:</p>
+                            </td>
+                            <td>
+                                <p>{{patient}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>ID Number:</p>
+                            </td>
+                            <td>
+                                <p>{{patient_id}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Birth Date:</p>
+                            </td>
+                            <td>
+                                <p>{{Date|date:"d.m.Y"}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Gender:</p>
+                            </td>
+                            <td>
+                                <p>{{Gender}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Email:</p>
+                            </td>
+                            <td>
+                                <p>{{email}}</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <h5 class="card-title">Assessment</h5>
+                            </td>
+                        </tr>
+                        <tr> 
+                            <td>
+                                <p>{{assessment}}</p>
+                            </td>
+                        </tr>
+                       
+
+                        <tr>
+                            <td>
+                                <h5 class="card-title">Diagnosis</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>{{diagnosis}}</p>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <h5 class="card-title">Prescription</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>{{Prescription}}</p>
+                            </td>
+                        </tr>
+                        
+                      </table>
+                      <!-- End Tables without borders -->
+
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Download</button>
+                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                      </div>
+        
+                    </div>
+                  </div>
+              </div><!-- End Bordered Tabs -->
+
+        </div>
+      
+    </section>
+
+  </main><!--
+
+
+{% endblock main %}

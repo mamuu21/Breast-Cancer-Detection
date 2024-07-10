@@ -1,0 +1,76 @@
+{% extends "header.html" %}
+
+{% block main %}
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Detection Page</h1>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-6">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Upload Image</h5>
+
+            <!-- Image upload form -->
+            <form id="upload-form" method="POST" enctype="multipart/form-data" action="{% url 'predict' %}">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="image" class="form-label">Select Image</label>
+                <input class="form-control" type="file" id="image" name="image" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Upload and Predict</button>
+            </form>
+            <!-- End image upload form -->
+
+          </div>
+        </div>
+
+        {% if uploaded_image %}
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Image</h5>
+
+            <!-- Display uploaded image -->
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-item active">
+                <img src="{{ uploaded_image.url }}" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <!-- End display uploaded image -->
+
+          </div>
+        </div>
+        {% endif %}
+
+        {% if status and probability %}
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Results</h5>
+
+            <!-- Display prediction results -->
+            <table class="table">
+              <tr>
+                <td><h5 class="card-title">Status:</h5></td>
+                <td><p>{{ status }}</p></td>
+              </tr>
+              <tr>
+                <td><h5 class="card-title">Probability:</h5></td>
+                <td><p>{{ probability }}</p></td>
+              </tr>
+            </table>
+            <!-- End display prediction results -->
+
+          </div>
+        </div>
+        {% endif %}
+        
+      </div>
+    </div>
+  </section>
+
+</main><!-- End #main -->
+{% endblock main %}

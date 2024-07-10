@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import DashBoardView, AddPatientView, PatientListView, ImageView, PatientDetailsView, AnalysisPageView
+from .views import DashBoardView, AddPatientView, PatientListView, ImageView, PatientDetailsView, AnalysisPageView, ReportView
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -11,6 +11,5 @@ urlpatterns = [
     path("images/", ImageView.as_view(), name="images"),
     path("patient_details/", PatientDetailsView.as_view(), name="patient_details"),
     path("analysis_page/", AnalysisPageView.as_view(), name="analysis_page"),
-    
-      
+    path("report/", ReportView.as_view(), name="report"),
 ] 

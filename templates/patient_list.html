@@ -31,18 +31,16 @@
                 <td>{{patient.image}}</td>
                 <td>{{patient.age}}</td>
                 <td>{{patient.status}}</td>
-                {% comment %} <td>
-                  <button class="btn btn-outline-primary"  onclick="viewPatientDetails('{{patient.patient_id}}')">
-                      View
-                  </button>
-              </td> {% endcomment %}
+
               <td>
-                
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable">
+
+                <button type="button" class="btn btn-outline-primary" onclick="window.location.href='{% url "report" %}'">
                   View
                 </button>
+   
 
-                  <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
+
+                  {% comment %} <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
                     <div class="modal-dialog modal-dialog-scrollable">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -92,7 +90,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> {% endcomment %}
               </td>
               
               
