@@ -1,33 +1,12 @@
-from django.db.models.query import QuerySet
 from django.views.generic import TemplateView, CreateView, ListView, DetailView
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
-from .models import Patient
+from .models import Patient, RadiologistComment
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
 from django.views import View
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-import json
-from django.shortcuts import render
-
-import logging
-from django.views import View
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
-from django.http import JsonResponse
 from .tflite_model import TFLiteModel as TFLModel
-
-import numpy as np
-from PIL import Image
-
-import io
-import requests
-
-
-logger = logging.getLogger(__name__)        
-        
+      
 class DashBoardView(LoginRequiredMixin, TemplateView):
     template_name = "dashboard.html"
     login_url = "login"
@@ -85,18 +64,67 @@ class AddPatientView(CreateView):
     template_name = "add_patient.html"
     model = Patient
     fields = ["patient_id", "name", "age", "gender", "image"]
-    success_url = reverse_lazy("analysis_page")
-    
+      
 
     def form_valid(self, form):
         form.instance.status = True  # Assuming True represents "normal"
         form.save()
         return super().form_valid(form)
-   
-    # TODO : adding model to investigate uploaded image for cancer detection
+    
+    # take patient id from the form and redirect to the analysis page
+    def get_success_url(self):
+        return reverse_lazy("analysis_page", kwargs={"patient_id": self.object.patient_id})
+        
+        
+        
       
       
 class AnalysisPageView(DetailView):
     template_name = "analysis_page.html"
+    model = Patient
+    context_object_name = "patient"
+    slug_url_kwarg = 'patient_id'
     
     
+    def get_object(self, queryset=None):
+        return self.model.objects.get(patient_id=self.kwargs.get('patient_id'))
+    
+    def post(self, request, *args, **kwargs):
+        patient_id = self.kwargs.get('patient_id')
+        comment = request.POST.get('comment')
+        
+        patient = Patient.objects.get(patient_id=patient_id)
+        radiologist = request.user
+        
+        RadiologistComment.objects.create(
+            patient=patient,
+            radiologist=radiologist,
+            comment=comment
+        )
+        
+        return super().get(request, *args, **kwargs)
+    
+    
+    # use LTModel to perform cancer detection from the image
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        patient = context['patient']
+        image_path = patient.image.path
+        print(image_path)
+        
+        model = TFLModel(image_path=image_path)
+        prediction = model.predict()
+        
+        print(prediction)
+        
+        if prediction == 0:
+            result = 'Normal'  
+        else:
+            result = 'Cancerous'
+            
+        print(result)
+        
+        context['result'] = result
+        
+        return context

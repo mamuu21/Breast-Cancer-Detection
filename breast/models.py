@@ -23,10 +23,17 @@ class Patient(models.Model):
     gender = models.CharField(max_length=5, choices=GENDER_CHOICES)
     image = models.FileField(upload_to='images/')
     status = models.BooleanField(choices=STATUS_CHOICES)
+    date = models.DateField(auto_now_add=True, blank=True)
     
     def __str__(self) -> str:
         return self.patient_id
+   
+class RadiologistComment(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    radiologist = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    comment = models.TextField()
+    date = models.DateField(auto_now_add=True)
     
-    # TODO : Integrate with django authentication and permissions (LOGIN, LOGOUT, PERMISSIONS)
- 
+    def __str__(self) -> str:
+        return self.patient.patient_id
     
