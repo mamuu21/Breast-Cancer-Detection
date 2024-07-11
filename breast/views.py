@@ -74,10 +74,6 @@ class AddPatientView(CreateView):
     # take patient id from the form and redirect to the analysis page
     def get_success_url(self):
         return reverse_lazy("analysis_page", kwargs={"patient_id": self.object.patient_id})
-        
-        
-        
-      
       
 class AnalysisPageView(DetailView):
     template_name = "analysis_page.html"
