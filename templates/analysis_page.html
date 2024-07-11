@@ -2,52 +2,67 @@
 
 {% block main %}
 <main id="main" class="main">
-
-  <div class="pagetitle">
-    <h1>Detection Page</h1>
-  </div><!-- End Page Title -->
-
   <section class="section">
     <div class="row">
       <div class="col-lg-6">
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Image</h5>
+            <h5 class="card-title">Patient Image</h5>
 
             <!-- Slides only carousel -->
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
               
                 <div class="carousel-item active">
-                  <img src="assets/img/slides-1.jpg" class="d-block w-100" alt="...">
+                  <img src="{{ patient.image.url }}" class="d-block w-100" alt="...">
                 </div>
-                
             </div><!-- End Slides only carousel-->
-
           </div>
         </div>
-
-        
-        
-        
       </div>
 
       <div class="col-lg-6">
         <div class="card">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Results</h5>
+              <h5 class="card-title">Analysis Results</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">{{ patient.patient_id }}</th>
+                    <td>{{ patient.name }}</td>
+                    <td>{{ patient.age }}</td>
+                    <td>{{ result }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <form method="post">
+                {% csrf_token %}
+              <div class="mb-3">
+                <input type="hidden" name="patient_id" value="{{ patient.patient_id }}">
+                <input type="hidden" name="result" value="{{ result }}">
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Comment</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="comment" rows="5"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </div>
         </div>
       </div>
-  
 
     </div>
   </section>
               
-
-
 </main><!-- End #main -->
 {% endblock main %}
 
