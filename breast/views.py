@@ -54,11 +54,12 @@ class PatientDetailsView(TemplateView):
 class ImageView(ListView):
     template_name = "images.html" 
     model = Patient
+    context_object_name = "patients"
     
-    
+    # return all patients' images
     def get_queryset(self):
         return Patient.objects.all()
-       
+    
     
 class AddPatientView(CreateView):
     template_name = "add_patient.html"
