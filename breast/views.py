@@ -26,22 +26,6 @@ import io
 import requests
 
 
-# @method_decorator(csrf_exempt, name='dispatch')
-# class PredictView(View):
-#     def post(self, request, *args, **kwargs):
-#         try:
-#             data = json.loads(request.body.decode('utf-8')).get('input_data')
-#             if data is None:
-#                 return JsonResponse({'error': 'No input data provided'}, status=400)
-            
-#             prediction_result = tflite_model.predict(data)
-#             return JsonResponse({'prediction': prediction_result})
-#         except Exception as e:
-#             return JsonResponse({'error': str(e)}, status=500)
-
-# Configure logging
-
-
 logger = logging.getLogger(__name__)        
         
 class DashBoardView(LoginRequiredMixin, TemplateView):
@@ -112,7 +96,7 @@ class AddPatientView(CreateView):
     # TODO : adding model to investigate uploaded image for cancer detection
       
       
-class AnalysisPageView(TemplateView):
+class AnalysisPageView(DetailView):
     template_name = "analysis_page.html"
     
     
