@@ -34,68 +34,11 @@
 
               <td>
 
-                <button type="button" class="btn btn-outline-primary" onclick="window.location.href='{% url "report" %}'">
-                  View
+                <button type="button" class="btn btn-outline-primary">
+                  <a href="{% url "report" patient.patient_id %}" >View</a>
                 </button>
    
-
-
-                  {% comment %} <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-scrollable">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Patient Details</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                            
-                            <h5 class="card-title">Patient Details</h5>
-            
-                            <div class="row">
-                              <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                              <div class="col-lg-9 col-md-8">Kevin Anderson</div>
-                            </div>
-            
-                            <div class="row">
-                              <div class="col-lg-3 col-md-4 label">Company</div>
-                              <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
-                            </div>
-            
-                            <div class="row">
-                              <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                              <div class="col-lg-9 col-md-8">Kevin Anderson</div>
-                            </div>
-            
-                            <div class="row">
-                              <div class="col-lg-3 col-md-4 label">Company</div>
-                              <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
-                            </div>
-            
-                            <div class="row">
-                              <div class="col-lg-3 col-md-4 label">Phone</div>
-                              <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
-                            </div>
-            
-                            <div class="row">
-                              <div class="col-lg-3 col-md-4 label">Email</div>
-                              <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
-                            </div>
-            
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Download</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> {% endcomment %}
               </td>
-              
-              
-
-                
               </tr>
               {% endfor %}
             </tbody>
@@ -114,28 +57,6 @@
 
 
 
-{% comment %} <script>
-  function viewPatientDetails(patientId) {
-    console.log(patientId)
-      
-      $.ajax({
-          url: '{% url "patient_details" %}',
-          type: 'POST',
-          data: {
-              'patient_id': patientId,
-              csrfmiddlewaretoken:"{{ csrf_token }}"
-          },
-          success: function(response) {
-              // Redirect to the page where you want to display the details
-              window.location.href = response.redirect_url;
-          },
-          error: function(xhr, errmsg, err) {
-              // Handle error
-              console.log(errmsg);
-          }
-      });
-  }
-</script> {% endcomment %}
 
 {% endblock main %}
 

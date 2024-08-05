@@ -7,7 +7,7 @@ class TFLiteModel:
     def __init__(self, image_path):
         self.image_path = image_path
         self.interpreter = tf.lite.Interpreter(
-            model_path="/media/brainart/external data/FYP/Breast-Cancer-Detection/models/quantized_model (1).tflite"
+            model_path=r"C:\Users\icare\Desktop\Cancer\Breast-Cancer-Detection\models\quantized_model (1).tflite"
         )
         self.interpreter.allocate_tensors()
         self.input_details = self.interpreter.get_input_details()

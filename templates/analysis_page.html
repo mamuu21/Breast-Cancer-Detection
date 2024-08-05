@@ -50,8 +50,15 @@
                 <input type="hidden" name="patient_id" value="{{ patient.patient_id }}">
                 <input type="hidden" name="result" value="{{ result }}">
               </div>
+              <div class="col-12">
+                <label for="inputNanme4" class="form-label">Probability</label>
+                <input type="hidden" name="probability" value="{{ probability }}">
+
+                {% comment %} <input type="text" class="form-control" id="inputNanme4"> {% endcomment %}
+              </div>
+             
               <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Comment</label>
+                <label for="exampleFormControlTextarea1" class="form-label">Prescription</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" name="comment" rows="5"></textarea>
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>

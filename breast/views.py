@@ -6,6 +6,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .tflite_model import TFLiteModel as TFLModel
+from django.shortcuts import redirect
+from django.http import HttpResponse
+
       
 class DashBoardView(LoginRequiredMixin, TemplateView):
     template_name = "dashboard.html"
@@ -33,10 +36,21 @@ class PatientListView(ListView):
     template_name = "patient_list.html"
     model = Patient
     
-    
-class ReportView(TemplateView):
+     
+class ReportView(DetailView):
     template_name = "report.html"
-   
+    model = RadiologistComment
+    slug_url_kwarg = 'patient_id'
+    context_object_name = "report"
+    
+    
+    def get_object(self, queryset=None):
+        try:
+            return self.model.objects.get(patient__patient_id=self.kwargs.get('patient_id'))
+        except Exception as e:
+            print(e)
+            return None
+
 
 class PatientDetailsView(TemplateView):
     template_name = "patient_details.html"
