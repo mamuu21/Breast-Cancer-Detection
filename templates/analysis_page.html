@@ -33,6 +33,8 @@
                     <th scope="col">Name</th>
                     <th scope="col">Age</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Probability</th>
+
                   </tr>
                 </thead>
                 <tbody>
@@ -41,6 +43,8 @@
                     <td>{{ patient.name }}</td>
                     <td>{{ patient.age }}</td>
                     <td>{{ result }}</td>
+                    <td>{{ probability }}</td>
+
                   </tr>
                 </tbody>
               </table>
@@ -49,13 +53,10 @@
               <div class="mb-3">
                 <input type="hidden" name="patient_id" value="{{ patient.patient_id }}">
                 <input type="hidden" name="result" value="{{ result }}">
-              </div>
-              <div class="col-12">
-                <label for="inputNanme4" class="form-label">Probability</label>
                 <input type="hidden" name="probability" value="{{ probability }}">
 
-                {% comment %} <input type="text" class="form-control" id="inputNanme4"> {% endcomment %}
               </div>
+        
              
               <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Prescription</label>
