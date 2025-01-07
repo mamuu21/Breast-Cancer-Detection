@@ -5,9 +5,9 @@ Built with Django, the system provides a web-based interface where users can upl
 and the CBIS-DDSM dataset for training and evaluation.
 
 Core Features:
--Upload and analyze mammography images.
--Classify images as normal or cancerous with confidence scores.
--Provides a user-friendly web interface.
+1. Upload and analyze mammography images.
+2. Classify images as normal or cancerous with confidence scores.
+3. Provides a user-friendly web interface.
 
 Tech Stack:
 1. Python, Django, TensorFlow
