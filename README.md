@@ -19,4 +19,4 @@ Installation Summary:
 2. Create a virtual environment.
 3. Install dependencies.
 4. Run migrations and start the server.
-5. Access the web app at http://localhost:8000.
+
